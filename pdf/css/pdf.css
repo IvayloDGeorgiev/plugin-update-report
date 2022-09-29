@@ -1,0 +1,173 @@
+.pdf-header {
+    height:100%;
+    width: 100%;
+    color: #fff;
+    padding-top: 300px;
+    background-image: url("/wp-content/plugins/plugin-update-report/pdf/assets/MainCover.JPG") no-repeat center center fixed;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-image-resize: 6;
+    background-image-resolution: from-image;
+}
+
+.pdf_company_logo {
+    width: 120px;
+    height: 30px;
+    background-image: url("/wp-content/plugins/plugin-update-report/pdf/assets/PageLogo.JPG") no-repeat center center fixed;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-image-resize: 6;
+    background-image-resolution: from-image;
+}
+
+
+.title_underline {
+    height: 7px;
+    width: 280px;
+    margin-top: 20px;
+    background:  linear-gradient(0.25turn, #d36AFF, #846cff, #406eff);
+}
+
+.successful_title_underline {
+    height: 5px;
+    width: 160px;
+    margin-top: 5px;
+    margin-left: 1px;
+    background:  linear-gradient(0.25turn, #d36AFF, #846cff, #406eff);
+}
+
+.unsuccessful_title_underline {
+    height: 5px;
+    width: 205px;
+    margin-top: 5px;
+    margin-left: 1px;
+    background:  linear-gradient(0.25turn, #d36AFF, #846cff, #406eff);
+}
+
+.page-pdf {
+    padding-left: 54px;
+    padding-right: 54px;
+}
+
+.title {
+    font-size: 37px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.subtitle {
+    font-size: 29px;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 20px;
+}
+
+.logo-header {
+    width: 250px;
+    height: 132px;
+    padding-top: 550px;
+}
+
+.monthtitle {
+    font-size: 24px;
+    color: #999999;
+}
+
+.successful {
+    page-break-before: always;
+    padding-top: 62px;
+}
+
+.footer {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    page-break-before: always;
+    background: url("/wp-content/plugins/plugin-update-report/pdf/assets/FooterCover.JPG") no-repeat 0 0;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-image-resize: 5;
+    background-image-resolution: from-image;
+}
+
+.footer p {
+    
+}
+
+.logo-footer {
+    width: 233px;
+    height: 85px;
+}
+
+.address {
+    font-size: 19px;
+    font-family: 'nunito';
+}
+
+.website {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'nunito';
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.unsuccessful {
+    padding-top: 62px;
+    page-break-before: always;
+}
+
+.successfulp {
+    font-size: 35px;
+    margin-bottom: 0;
+}
+
+.tdthead {
+    font-weight: bold;
+}
+
+table.plugin-generator {
+    padding-top: 30px;
+    max-width: 100%;
+    background: white;
+    width: 100%;
+    border-spacing: 0;
+}
+
+.border-lefttd {
+    border-left: 1px solid #666;
+}
+
+tr {
+    border-bottom: 1px solid #666;
+}
+
+td {
+    vertical-align: top;
+    border-bottom: 1px solid #666;
+    border-right: 1px solid #666;
+}
+
+td {padding: 7px; color: #666; font-size: 15px; }
+
+thead td {
+    color: #fff;
+    background-color: #000;
+    border-top: 1px solid #000;
+}
+
+td { 
+    width: 19%; 
+}
+
+td.name {
+    width: 20%; 
+}
+
+td.description {
+    width: 22%;
+}
+
+td.text_center {
+    text-align: center;
+}

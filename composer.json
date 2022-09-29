@@ -1,0 +1,6 @@
+{
+    "name": "ivo/desktop",
+    "require": {
+        "mpdf/mpdf": "^8.1"
+    }
+}
