@@ -33,3 +33,15 @@ if (isset($_POST['submitbtn'])) {
     }
 
 }
+  
+if(isset($_POST['delete'])) {
+    global $wpdb;
+    $wp_table_name = $wpdb->prefix . 'Plugin_Update_Report_DB';
+    $id = $_POST['plugin_id'];
+    $wpdb->delete( $wp_table_name, array( 'id' => $id ) );
+    if($_POST['delete']) {
+        echo "<script>alert('The record has been removed!');</script>";
+    }else {
+        echo "<script>alert('The record couldn't be removed!');</script>";
+    }
+}

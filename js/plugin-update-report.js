@@ -127,8 +127,9 @@
                         var date_formatted = moment(update.date).format(js_date_format);
                      
                         var newUpdate = '<tr><td class="plugin_name">' + update.name + '</td><td class="plugin_description">' + update.description + '</td><td class="plugin_date">' + date_formatted + '</td><td class="plugin_oldversion"> Version: ' + update.version_before + ' </td><td class="plugin_newversion"> Version: ' + update.version_after + '</td></tr>';
-                        
-                        var newUnsuccessfulUpdate = '<tr><td class="plugin_name">' + update.name + '</td><td class="plugin_description">' + update.description + '</td><td class="plugin_description">' + update.reason + '</td><td class="plugin_date">' + date_formatted + '</td></tr>';
+
+                        var plugin_id = update.id;
+                        var newUnsuccessfulUpdate = '<tr><td class="plugin_name">' + update.name + '</td><td class="plugin_description">' + update.description + '</td><td class="plugin_description">' + update.reason + '</td><td class="plugin_date">' + date_formatted + '</td><td><form method = "POST" action=""><input type = "hidden" value = "'+ plugin_id +'" name ="plugin_id"/><input type="submit" name = "delete" value ="Remove" class="button button-primary"/></form></td></tr>';
                        
                         if (newUpdate) {
                             pdfInput += newUpdate;

@@ -102,6 +102,9 @@ table {
     text-align: center;
     width:10%;
 }
+.plugin_remove {
+    width: 5%;
+}
 .plugin_oldversion {
     text-align: center;
     width: 10%;

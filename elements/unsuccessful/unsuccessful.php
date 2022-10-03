@@ -34,11 +34,12 @@ include PLUGIN_PATH2 . "/unsuccessful_functions.php";
                         <th class="plugin_description">Description</th>
                         <th class="plugin_oldversion">Reason</th>
                         <th class="plugin_date">Date</th>
+                        <th class="plugin_remove">Remove</th>
                     </tr>
                 </thead> 
-                <tbody id="plugin-update-report-plugin-updates-list2"></tbody>
+                <tbody id="plugin-update-report-plugin-updates-list2">
+                </tbody>
             </table>
         </div>
     </div>
 </div>
-
