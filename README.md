@@ -4,9 +4,9 @@ Plugin Name: Plugin Update Reports
 Version: 1.0
 Author: Ivo Georgiev
 
-=========================
-    HOW TO USE IT?
-=========================
+
+ **==   HOW TO USE IT? ==**
+
 
 Simply install the plugin on the client site.
 
@@ -15,7 +15,6 @@ After activation look on the left hand side at the very top in the Dashboard and
 A new page will open with the User Interface for the plugin.
 
 Here you can see 2 tables:
-
 ![Capture](https://user-images.githubusercontent.com/82714445/200006112-0018c64f-b0df-4d8e-ac27-7121ef25b075.JPG)
 
 
@@ -24,7 +23,8 @@ The tables will be empty at first untill plugin updates are made to the plugins 
 After plugin update the table will automaticaly generate with the new data for that current day.
 
 From the calendar in the top right corner you can choose the date or multiple dates for which you would like to see the data for.
-![Capture](https://user-images.githubusercontent.com/82714445/200008911-d8b0573d-7777-4978-9099-79cb31ddfe24.JPG)
+![Capture](https://user-images.githubusercontent.com/82714445/200010855-f292c8a7-8400-4064-ae59-00a65222d431.JPG)
+
 
 
 **!!! IMPORTANT: You can only see the plugin updates made after you have installed the plugin. Plugin updates made before installing the plugin will not be shown!!!!**
@@ -33,7 +33,7 @@ From the calendar in the top right corner you can choose the date or multiple da
 Any unsuccessful updates are added manualy, most of them can be solved. 
 
 For the unsuccessful plugins that solution cannot be found we can add manualy by using the input fields above the second table.
-![Capture](https://user-images.githubusercontent.com/82714445/200009317-5124e4d1-10a2-4a99-acf8-4e6ba516ef01.JPG)
+![Capture](https://user-images.githubusercontent.com/82714445/200008911-d8b0573d-7777-4978-9099-79cb31ddfe24.JPG)
 
 
 Once added, the unssuccessful update will be saved to the data base, if a solution is found or there was a mistake when entering the details, the entry can be deleted by the " Remove" button the right handside.
