@@ -32,7 +32,7 @@ if (PLUGIN_PATH) {
     $file = $client_name . ' | Plugin Update Report';
 
     $file_title = $client_name . '_' . $update_date;
-    $file_name = $client_name . '_Plugin_Update_Report_' . $update_date . '.pdf';
+    $file_name = $client_name . ' Plugin' . ' Update' . ' Report ' . $update_date . '.pdf';
 
     // Prepare Mpdf font directory for font enqueuing
     $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
@@ -72,7 +72,7 @@ if (PLUGIN_PATH) {
     $mpdf->WriteHTML($stylesheet, 1);
     $mpdf->WriteHTML($html, 2);
     $mpdf->SetTitle($file);
-    $mpdf->Output('Plugin Updates.pdf','I');
+    $mpdf->Output($file_name . '.pdf','I');
 
 } else {
     print "Access Denied";

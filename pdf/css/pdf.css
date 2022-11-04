@@ -10,6 +10,8 @@
     background-image-resolution: from-image;
 }
 
+
+
 .pdf_company_logo {
     width: 120px;
     height: 30px;
@@ -154,6 +156,10 @@ thead td {
     color: #fff;
     background-color: #000;
     border-top: 1px solid #000;
+}
+
+tr {
+    display: table-row-group !important;
 }
 
 td { 

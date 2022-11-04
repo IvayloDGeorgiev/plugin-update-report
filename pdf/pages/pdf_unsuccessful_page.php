@@ -4,18 +4,16 @@
 
 function build_page_three($unsuccessful_updates)
 {
-
-    if ($result == null) {
-        $unsuccessfultable = <<<EOT
-        <table class="plugin-generator">
-        <thead>
-            <tr>
-                <td class="tdthead border-lefttd">Plugin</td>
-                <td class="tdthead">Description</td>
-                <td class="tdthead">Reason</td>
-            </tr>
-        </thead>
-        <tbody>
+    $unsuccessfultable = <<<EOT
+    <table class="plugin-generator">
+    <thead>
+        <tr>
+            <td class="tdthead border-lefttd">Plugin</td>
+            <td class="tdthead">Description</td>
+            <td class="tdthead">Reason</td>
+        </tr>
+    </thead>
+    <tbody>
     EOT;
 
     global $wpdb;
@@ -37,47 +35,37 @@ function build_page_three($unsuccessful_updates)
             ORDER BY `name` ASC";
     }
 
-    $result =  $wpdb->get_results($wpdb->prepare($query));
-
-    foreach ($result as $content) {
-        $name = $content->name;
-        $description = $content->description;
-        $reason = $content->reason;
-        
-
-        $unsuccessfultable .= <<<EOT
-            <tr>
-                <td class="name border-lefttd">$name</td>
-                <td class="description">$description</td>
-                <td>$reason</td>
-            </tr>
-        EOT;
+    $result1 =  $wpdb->get_results($wpdb->prepare($query));
+    if ($result1 != null) {
+        foreach ($result1 as $content_uns) {
+            $name = $content_uns->name;
+            $description = $content_uns->description;
+            $reason = $content_uns->reason;
+            
+            
+            $unsuccessfultable .= <<<EOT
+                <tr>
+                    <td class="name border-lefttd">$name</td>
+                    <td class="description">$description</td>
+                    <td>$reason</td>
+                </tr>
+            EOT;
         }
-
-        $unsuccessfultable .= <<<EOT
-            </tbody>
-        </table>
-        EOT;
     } else {
-        $unsuccessfultable = <<<EOT
-        <table class="plugin-generator">
-        <thead>
-            <tr>
-                <td class="tdthead border-lefttd">Plugin</td>
-                <td class="tdthead">Description</td>
-                <td class="tdthead">Reason</td>
-            </tr>
-        </thead>
-        <tbody>
+        $unsuccessfultable .= <<<EOT
         <tr>
-            <td class="border-lefttd">n/a</td>
-            <td></td>
+            <td class="name border-lefttd">N/A</td>
+            <td class="description"></td>
             <td></td>
         </tr>
-        </tbody>
-        </table>
     EOT;
-    }
+    } 
+
+    $unsuccessfultable .= <<<EOT
+        </tbody>
+    </table>
+    EOT;
+    
 
     $html_page_three = <<<EOT
     <div class="unsuccessful page-pdf">

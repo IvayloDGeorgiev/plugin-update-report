@@ -6,12 +6,12 @@ define('PLUGIN_PATH', __DIR__);
 function plugin_update_report_stats_page() {
     $default_title = get_option( 'plugin_update_report_default_title' );
     if (!$default_title) {
-        $default_title = get_bloginfo('name') . ' ' . __('Site Report','plugin-update-report');
+        $default_title = get_bloginfo('name') . ' ' . __('Plugin Update Report','plugin-update-report');
     }
 	?>
         <div class="plugin-update-report-stats-screen">
-            <div class="plugin-update-report-header">
-                <h1><?php _e('Plugin Update Reports','plugin-update-report'); ?></h1>
+            <div class="plugin-update-report-header main_pur_heading">
+                <h1><?php _e($default_title,'plugin-update-report'); ?></h1>
                 <div class="plugin-update-report-date-chooser-area d-flex">
 
                     <form target="_blank" action="/wp-admin/index.php" method="get" data-generate-pdf-form>
@@ -54,14 +54,12 @@ function plugin_update_report_stats_page_updates() {
     ?>
     <div id="pdf-content" class="metabox-holder">
         <div class="postbox plugin-update-report-postbox loading" id="plugin-update-report-updates">
-            <div class="postbox-header">
-                <h2 class="hndle"><?php _e('Plugin Updates','plugin-update-report'); ?></h2>
-            </div>
+            
             <div class="inside">
                 <div class="main">
                     <!-- Successful Updates -->
                     <?php include PLUGIN_PATH . "/elements/successful/successful.php"; ?>
-                    
+                
                     <!-- Unsuccesful Updates -->
                     <?php include  PLUGIN_PATH . "/elements/unsuccessful/unsuccessful.php"; ?>
                 </div><!-- .inside -->

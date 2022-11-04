@@ -6,6 +6,30 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.main_pur_heading {
+    background-color: white;
+    border: 1px solid #c3c4c7;
+    padding: 0 1rem 0 1rem;
+}
+.main_pur_heading h1,h2 {
+    color:#6c6c6c;
+}
+.unsuccessful_heading_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.postbox {
+    border-top: hidden;
+}
+.postbox .inside {
+    border-top: hidden;
+    margin-top: 0;
+}
+.metabox-holder {
+padding: 0 !important;
+}
 .plugin-update-report-date-chooser-area form {
     margin-right: 0.4rem;
 }
@@ -28,9 +52,7 @@
     font-weight: 600;
     margin-top:0px;
 }
-.plugin-update-report-postbox {
-    margin:10px 0px;
-}
+
 .plugin-update-report-postbox .hndle {
     cursor:default !important;
 }

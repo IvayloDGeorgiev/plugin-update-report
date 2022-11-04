@@ -14,19 +14,22 @@ include PLUGIN_PATH2 . "/unsuccessful_functions.php";
 
 <div class="unsuccessful_container">
     <div class="container">
-        <h2 class="unsuccessful-h2">Add Unsuccesful Plugin information</h2>
+        <div class="row unsuccessful_heading_wrapper main_pur_heading">
+            <h2 class="unsuccessful-h2">Add Unsuccesful Plugin information</h2>
+            <div>
+                <form  method="post" >
 
-        <form  method="post" >
+                    <input id="plugin_name" type="text" name="plugin_name" placeholder="Plugin Name...">
 
-            <input id="plugin_name" type="text" name="plugin_name" placeholder="Plugin Name...">
+                    <input id="description" type="text" name="description" placeholder="Description...">
 
-            <input id="description" type="text" name="description" placeholder="Description...">
-
-            <input id="reason" type="text" name="reason" placeholder="Reason...">
-        
-            <input type="submit" value="Submit" name="submitbtn" class="button button-primary">
-        </form>
-        <div class="plugin-update-report-section plugin-update-report-border-top">
+                    <input id="reason" type="text" name="reason" placeholder="Reason...">
+                
+                    <input type="submit" value="Submit" name="submitbtn" class="button button-primary">
+                </form>
+            </div>
+        </div>
+        <div class="plugin-update-report-section plugin-update-report-border-top row">
             <table  id="PluginTable" class="plugin-update-report-list">
                 <thead style="border-bottom: 1px solid black;">
                     <tr>

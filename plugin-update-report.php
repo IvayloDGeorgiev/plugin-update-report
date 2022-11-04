@@ -117,6 +117,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
 
                 $plugin_update_report_table_name = $wpdb->prefix . 'Plugin_Update_Report_DB';
 
+                //Check if the fields exist by comparing the characters
                 $charset_collate = $wpdb->get_charset_collate();
 
                 $plugin_update_report_sql = "CREATE TABLE $plugin_update_report_table_name (
@@ -126,10 +127,10 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                     name VARCHAR(191),
                     slug VARCHAR(191),
                     description VARCHAR(191) DEFAULT 'WordPress plugin' NOT NULL,
-                    version_before VARCHAR(191),
-                    version_after VARCHAR(191),
-                    reason VARCHAR(191),
-                    update_status VARCHAR(30) NOT NULL,
+                    version_before VARCHAR(191) DEFAULT 'Pending' NOT NULL,
+                    version_after VARCHAR(191) DEFAULT 'Pending' NOT NULL,
+                    reason VARCHAR(191) DEFAULT 'N/A' NOT NULL,
+                    update_status VARCHAR(30) DEFAULT 'Pending' NOT NULL,
                     active tinyint(1),
                     UNIQUE KEY id (id)
                 ) $charset_collate;";
@@ -203,9 +204,9 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                 global $wpdb;
                 $plugin_update_report_table_name = $wpdb->prefix . 'Plugin_Update_Report_DB';
                 
-                if ( ! function_exists( 'get_plugins' ) ) {
-                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                }
+                // if ( ! function_exists( 'get_plugins' ) ) {
+                //     require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                // }
 
                 $timezone = wp_timezone();
                 $now = new DateTime("now", $timezone);
@@ -232,8 +233,9 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                         "SELECT * 
                         FROM $plugin_update_report_table_name 
                         WHERE `type` = 'plugin' 
+                        AND `slug` = %s
                         AND `slug` = %s  
-                        AND `date` = %s", 
+                        ORDER BY `date` DESC",
                         array($plugin_slug, $mysqldate) ) );
 
                     if (!$last_plugin_update || version_compare($plugin['Version'], $last_plugin_update->version_after, '>')) {
@@ -248,9 +250,9 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                             $update_id = $today_plugin_update->id;
                         }
 
-                        $update_status = '';
+                        $update_status = 'successful';
                         if ($today_plugin_update) {
-                            $update_status = 'successful';
+                            $update_id = $today_plugin_update->$update_status;
                         }
                         
                         $plugin_update = array(
@@ -321,6 +323,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                             <h2 id="plugin-update-report-plugin-update-count"><?php echo esc_html($updates_data->total_plugins_updated); ?></h2>
                         <?php }
                         else if ('#plugin-update-report-plugin-update-count2') {?>
+                        
                             <h2 id="plugin-update-report-plugin-update-count2"><?php echo esc_html($updates_data->total_unsuccessful_plugins_updated); ?></h2>
                         <?php } ?>
                         <h3><?php printf( __( 'Plugin %s Updates', 'plugin-update-report' ), '<br>' ); ?></h3>

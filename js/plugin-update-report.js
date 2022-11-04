@@ -45,8 +45,8 @@
             getData(startDate, endDate);
         });
 
-        getData(moment().format("YYYY-MM-DD"), moment().add(1, 'days').format("YYYY-MM-DD"));
-        setDates(moment().format("YYYY-MM-DD"), moment().add(1, 'days').format("YYYY-MM-DD"), "Today");
+        getData(moment().format("YYYY-MM-DD"), moment().add(0, 'days').format("YYYY-MM-DD"));
+        setDates(moment().format("YYYY-MM-DD"), moment().add(0, 'days').format("YYYY-MM-DD"), "Today");
 
         $("#date-range").datepicker({
             maxDate: 0,
@@ -78,7 +78,7 @@
                     $(".to_value").val(dateText);
                     $("#plugin-update-report-end-date").text(moment(dateText).format(js_date_format));
                 }
-                // $(this).datepicker(); //not really sure why this was here?
+                $(this).datepicker();
             }
         });
 
@@ -101,8 +101,8 @@
     }
 
     function getData(startDate, endDate) {
-        var start_date_utc = moment(startDate).add(1, 'days').utc().format("YYYY-MM-DD");
-        var end_date_utc = moment(endDate).add(1, 'days').utc().format("YYYY-MM-DD");
+        var start_date_utc = moment(startDate).format("YYYY-MM-DD");
+        var end_date_utc = moment(endDate).format("YYYY-MM-DD");
         $(document).trigger('plugin_update_report_js_get_data', [start_date_utc, end_date_utc]);
     }
 
