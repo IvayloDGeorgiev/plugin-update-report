@@ -5,7 +5,7 @@ Version: 1.0
 Author: Ivo Georgiev
 
 
- **==   HOW TO USE IT? ==**
+ ## HOW TO USE IT?
 
 
 Simply install the plugin on the client site.
@@ -37,10 +37,11 @@ For the unsuccessful plugins that solution cannot be found we can add manualy by
 
 
 Once added, the unssuccessful update will be saved to the data base, if a solution is found or there was a mistake when entering the details, the entry can be deleted by the " Remove" button the right handside.
+
 ![remove](https://user-images.githubusercontent.com/82714445/200011453-997075f8-df6b-4d09-aa69-982c933517a4.JPG)
 
 
-
 When you are happy with the updates for the dates you have selected and you wish to get a coppy of the updates in a PDF file, simply click the Generate PDF, and a PDF will be Generated with the plugin updates for the dates you have chosen in the calendar.
+
 ![Capture](https://user-images.githubusercontent.com/82714445/200009987-a3fb7471-f5cf-4742-bd16-ba7b1c09b4d7.JPG)
 
