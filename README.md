@@ -15,4 +15,7 @@ After activation look on the left hand side at the very top in the Dashboard and
 
 A new page will open with the User Interface for the plugin.
 
-Here you can see 2 tables![Capture](https://user-images.githubusercontent.com/82714445/200005615-3b212e6d-fbaa-40f1-9a1c-00e38bca39a3.JPG)
+Here you can see 2 tables:
+
+![Capture](https://user-images.githubusercontent.com/82714445/200006112-0018c64f-b0df-4d8e-ac27-7121ef25b075.JPG)
+
