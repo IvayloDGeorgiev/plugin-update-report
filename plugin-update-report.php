@@ -204,9 +204,9 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                 global $wpdb;
                 $plugin_update_report_table_name = $wpdb->prefix . 'Plugin_Update_Report_DB';
                 
-                // if ( ! function_exists( 'get_plugins' ) ) {
-                //     require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                // }
+                if ( ! function_exists( 'get_plugins' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                }
 
                 $timezone = wp_timezone();
                 $now = new DateTime("now", $timezone);
@@ -226,6 +226,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                          FROM $plugin_update_report_table_name 
                          WHERE `type` = 'plugin' 
                          AND `slug` = %s 
+                         AND `update_status` = %s
                          ORDER BY `date` DESC", 
                          array($plugin_slug) ) );
 
@@ -234,7 +235,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                         FROM $plugin_update_report_table_name 
                         WHERE `type` = 'plugin' 
                         AND `slug` = %s
-                        AND `slug` = %s  
+                        AND `update_status` = %s  
                         ORDER BY `date` DESC",
                         array($plugin_slug, $mysqldate) ) );
 
@@ -252,7 +253,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
 
                         $update_status = 'successful';
                         if ($today_plugin_update) {
-                            $update_id = $today_plugin_update->$update_status;
+                            $update_status = $today_plugin_update->$update_status;
                         }
                         
                         $plugin_update = array(
