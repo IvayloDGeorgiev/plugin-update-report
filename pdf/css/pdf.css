@@ -3,6 +3,8 @@
     width: 100%;
     color: #fff;
     padding-top: 300px;
+    padding-left: 100px;
+    padding-right: 100px;
     background-image: url("/wp-content/plugins/plugin-update-report/pdf/assets/MainCover.JPG") no-repeat center center fixed;
     background-position: top left;
     background-repeat: no-repeat;
