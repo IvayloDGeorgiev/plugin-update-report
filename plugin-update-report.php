@@ -126,9 +126,9 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                     name VARCHAR(191),
                     slug VARCHAR(191),
                     description VARCHAR(191) DEFAULT 'WordPress plugin' NOT NULL,
-                    version_before VARCHAR(191) NOT NULL,
+                    version_before VARCHAR(191),
                     version_after VARCHAR(191),
-                    reason VARCHAR(191) NOT NULL,
+                    reason VARCHAR(191),
                     update_status VARCHAR(30) NOT NULL,
                     active tinyint(1),
                     UNIQUE KEY id (id)
@@ -194,7 +194,6 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                 }
             }
 
-            
             /**
              * Loop through each type of update and determine if there is now a newer version
              */
@@ -239,7 +238,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
 
                     if (!$last_plugin_update || version_compare($plugin['Version'], $last_plugin_update->version_after, '>')) {
 
-                        $last_version = 'Pending...';
+                        $last_version = 'Not Available';
                         if ($last_plugin_update) {
                             $last_version = $last_plugin_update->version_after;
                         }
@@ -249,14 +248,16 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                             $update_id = $today_plugin_update->id;
                         }
 
+                        $update_status = 'Pending';
+                        if ($today_plugin_update) {
+                            $update_status = 'successful';
+                        } else if (!$today_plugin_update && $last_plugin_update) {
+                            $update_status = $last_plugin_update->update_status;
+                        }
+
                         $reason = 'Not Available';
                         if ($today_plugin_update) {
                             $reason = $today_plugin_update->reason;
-                        }
-
-                        $update_status = 'Pending...';
-                        if ($today_plugin_update) {
-                            $update_status = 'successful';
                         }
                         
                         $plugin_update = array(
@@ -278,86 +279,6 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                 }
                 do_action('plugin_update_report_check');
             }
-
-
-            /**
-             * Loop through each type of update and determine if there is now a newer version
-             */
-            // add_action( 'plugin_update_report_check_for_updates_daily', 'plugin_update_report_check_for_updates' );
-            // function plugin_update_report_check_for_updates() {
-
-            //     global $wpdb;
-            //     $plugin_update_report_table_name = $wpdb->prefix . 'Plugin_Update_Report_DB';
-                
-            //     if ( ! function_exists( 'get_plugins' ) ) {
-            //         require_once ABSPATH . 'wp-admin/includes/plugin.php';
-            //     }
-
-            //     $timezone = wp_timezone();
-            //     $now = new DateTime("now", $timezone);
-            //     $mysqldate = $now->format('Y-m-d');
-
-            //     $plugins = get_plugins();
-                
-            //     foreach($plugins as $plugin_slug => $plugin) {
-                
-            //         $plugin_active = false;
-            //         if ( is_plugin_active( $plugin_slug ) ) {
-            //             $plugin_active = true;
-            //         } 
-
-            //         $last_plugin_update = $wpdb->get_row( $wpdb->prepare(
-            //             "SELECT *
-            //              FROM $plugin_update_report_table_name 
-            //              WHERE `type` = 'plugin' 
-            //              AND `slug` = %s 
-            //              ORDER BY `date` DESC", 
-            //              array($plugin_slug) ) );
-
-            //         $today_plugin_update = $wpdb->get_row( $wpdb->prepare(
-            //             "SELECT * 
-            //             FROM $plugin_update_report_table_name 
-            //             WHERE `type` = 'plugin' 
-            //             AND `slug` = %s
-            //             ORDER BY `date` DESC",
-            //             array($plugin_slug, $mysqldate) ) );
-
-            //         if (!$last_plugin_update || version_compare($plugin['Version'], $last_plugin_update->version_after, '>')) {
-
-            //             $last_version = $today_plugin_update->version_before;
-            //             if ($last_plugin_update) {
-            //                 $last_version = $last_plugin_update->version_after;
-            //             }
-
-            //             $update_id = null;
-            //             if ($today_plugin_update) {
-            //                 $update_id = $today_plugin_update->id;
-            //             }
-
-            //             $update_status = $today_plugin_update->update_status;
-            //             if ($today_plugin_update) {
-            //                 $update_status = 'successful';
-            //             }
-                        
-            //             $plugin_update = array(
-            //                 'id' => $update_id,
-            //                 'date' => $mysqldate,
-            //                 'type' => 'plugin',
-            //                 'name' => $plugin['Name'],
-            //                 'slug' => $plugin_slug,
-            //                 'description' => $plugin['Description'],
-            //                 'version_before' => $last_version,
-            //                 'version_after' => $plugin['Version'],
-            //                 'reason' => $reason,
-            //                 'update_status' => $update_status,
-            //                 'active' => $plugin_active,
-            //             );
-
-            //             plugin_update_report_track_update($plugin_update);
-            //         }
-            //     }
-            //     do_action('plugin_update_report_check');
-            // }
 
             /**
              * Track a single update and add it to the database
@@ -407,7 +328,6 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                             <h2 id="plugin-update-report-plugin-update-count"><?php echo esc_html($updates_data->total_plugins_updated); ?></h2>
                         <?php }
                         else if ('#plugin-update-report-plugin-update-count2') {?>
-                        
                             <h2 id="plugin-update-report-plugin-update-count2"><?php echo esc_html($updates_data->total_unsuccessful_plugins_updated); ?></h2>
                         <?php } ?>
                         <h3><?php printf( __( 'Plugin %s Updates', 'plugin-update-report' ), '<br>' ); ?></h3>
