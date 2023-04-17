@@ -4,12 +4,12 @@ define('PLUGIN_URL', site_url());
 // includes function returning main pdf page
 
 
-function build_main_page($client_name, $update_date, $successful_updates, $unsuccessful_updates)
+function build_main_page($client_name, $update_date, $update_year, $successful_updates, $unsuccessful_updates)
 {
 
     include_once PLUGIN_PATH . '/pdf/pages/pdf_main_page.php';
 
-    $html = build_page_one( $client_name, $update_date);
+    $html = build_page_one( $client_name, $update_date, $update_year);
 
     // includes function returning successful updates page
 

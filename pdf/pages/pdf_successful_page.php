@@ -72,7 +72,7 @@ function build_page_two($successful_updates) {
                     <td class="tdthead border-lefttd">Plugin</td>
                     <td class="tdthead">Description</td>
                     <td class="tdthead">Date Updated</td>
-                    <td class="tdthead">Current Version</td>
+                    <td class="tdthead">Old Version</td>
                     <td class="tdthead">New Version</td>
                 </tr>
             </thead>

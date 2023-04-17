@@ -218,7 +218,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                     $plugin_active = false;
                     if ( is_plugin_active( $plugin_slug ) ) {
                         $plugin_active = true;
-                    }
+                    } 
 
                     $last_plugin_update = $wpdb->get_row( $wpdb->prepare(
                         "SELECT *
@@ -233,37 +233,31 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                         FROM $plugin_update_report_table_name 
                         WHERE `type` = 'plugin' 
                         AND `slug` = %s  
-                        AND `date` = %s",
+                        AND `date` = %s", 
                         array($plugin_slug, $mysqldate) ) );
 
                     if (!$last_plugin_update || version_compare($plugin['Version'], $last_plugin_update->version_after, '>')) {
 
-                        
+                        $last_version = 'Not Available';
                         if ($last_plugin_update) {
                             $last_version = $last_plugin_update->version_after;
-                        } else {
-                            $last_version = 'Not Available';
                         }
-                        
+
+                        $update_id = null;
                         if ($today_plugin_update) {
                             $update_id = $today_plugin_update->id;
-                        } else {
-                            $update_id = null;
                         }
 
+                        $update_status = 'Pending';
                         if ($today_plugin_update) {
                             $update_status = 'successful';
-                        } else if (!$today_plugin_update && $last_plugin_update->update_status) {
+                        } else if (!$today_plugin_update && $last_plugin_update) {
                             $update_status = $last_plugin_update->update_status;
-                        } else {
-                            $update_status = 'pending';
                         }
 
-                        
+                        $reason = 'Not Available';
                         if ($today_plugin_update) {
                             $reason = $today_plugin_update->reason;
-                        } else {
-                            $reason = 'Not Available';
                         }
                         
                         $plugin_update = array(

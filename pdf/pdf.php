@@ -10,6 +10,7 @@ if (PLUGIN_PATH) {
     // includes function returning variables
     $client_name = get_bloginfo('name');
     $update_date = date('F');
+    $update_year = date('Y');
 
     $successful_updates = '';
     $unsuccessful_updates = '';
@@ -23,7 +24,7 @@ if (PLUGIN_PATH) {
     */
     include_once PLUGIN_PATH . '/pdf/pages/main-page.php';
 
-    $html = build_main_page($client_name, $update_date, $successful_updates, $unsuccessful_updates, $notes);
+    $html = build_main_page($client_name, $update_date, $update_year, $successful_updates, $unsuccessful_updates, $notes);
 
     // Includes Stylesheet
     $stylesheet = file_get_contents(PLUGIN_PATH . '/pdf/css/pdf.css');
@@ -32,7 +33,7 @@ if (PLUGIN_PATH) {
     $file = $client_name . ' | Plugin Update Report';
 
     $file_title = $client_name . '_' . $update_date;
-    $file_name = $client_name . ' Plugin' . ' Update' . ' Report ' . $update_date . '.pdf';
+    $file_name = $client_name . '_Plugin' . ' Update' . ' Report_' . $update_date . ' ' . $update_year;
 
     // Prepare Mpdf font directory for font enqueuing
     $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
