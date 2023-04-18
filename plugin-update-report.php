@@ -9,14 +9,20 @@
 * Author URI: https://www.linkedin.com/in/ivogeorgiev404
 */
 
+namespace PluginUpdateReport;
+
+use Updater\Updater;
+
 define('PLUGIN_PATH', __DIR__);
 define('PLUGIN_URL', site_url());
-define( 'PLUGIN_UPDATE_REPORT_VERSION', '1.0' );
+define('PLUGIN_UPDATE_REPORT_VERSION', '1.0');
 
 if (! class_exists('Plugin_Update_Report_Generator')) {
-    class Plugin_Update_Report_Generator {
+    class Plugin_Update_Report_Generator extends Updater
+    {
         //CONSTRUCTOR
-        public function __construct() {
+        public function __construct()
+        {
             add_action('admin_menu', array( &$this, 'list_generator_menu'));
             add_action('init', array( &$this, 'register_session'));
             add_action('init', [$this, 'generate_pdf_action']);
@@ -30,7 +36,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
         public function generate_pdf_action()
         {
             if (
-                $_GET['action'] == 'generatePDF' && 
+                $_GET['action'] == 'generatePDF' &&
                 $_GET['page'] == 'plugin_update_report'
             ) {
                 include (__DIR__ . '/pdf/pdf.php');
@@ -64,12 +70,12 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
              //Scripts
              wp_enqueue_script( 'script-js', plugin_dir_url( __FILE__ ) . 'js/script.js', array(), '1', true );
              wp_enqueue_script( 'plugin-update-report-js', plugin_dir_url( __FILE__ ) . 'js/plugin-update-report.js', array(), '1', true );
- 
+
              wp_enqueue_script( 'jquery-ui-datepicker' );
              wp_enqueue_script( 'moment-js', plugin_dir_url( __FILE__ ) . 'js/moment.js', array(), '2.29.2', true );
              wp_enqueue_script('thickbox');
              wp_enqueue_style( 'thickbox' );
-     
+
              wp_register_script( 'plugin-update-report1-js', plugin_dir_url( __FILE__ ) . 'js/plugin-update-report.js', array('jquery','jquery-ui-datepicker'), PLUGIN_UPDATE_REPORT_VERSION, true );
              $date_format = 'd/m/Y';
              $js_data = array(
@@ -150,7 +156,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
             function plugin_update_report_load_actions(){
 
                 if (is_admin() || wp_doing_cron()) {
-                
+
                     $updates_enabled = get_option( 'plugin_update_report_enable_updates' );
                     if ($updates_enabled == 'on') {
                         add_action('plugin_update_report_stats', 'plugin_update_report_stats_page_updates', 10);
@@ -202,7 +208,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
 
                 global $wpdb;
                 $plugin_update_report_table_name = $wpdb->prefix . 'Plugin_Update_Report_DB';
-                
+
                 if ( ! function_exists( 'get_plugins' ) ) {
                     require_once ABSPATH . 'wp-admin/includes/plugin.php';
                 }
@@ -212,28 +218,28 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                 $mysqldate = $now->format('Y-m-d');
 
                 $plugins = get_plugins();
-                
+
                 foreach($plugins as $plugin_slug => $plugin) {
-                
+
                     $plugin_active = false;
                     if ( is_plugin_active( $plugin_slug ) ) {
                         $plugin_active = true;
-                    } 
+                    }
 
                     $last_plugin_update = $wpdb->get_row( $wpdb->prepare(
                         "SELECT *
-                         FROM $plugin_update_report_table_name 
-                         WHERE `type` = 'plugin' 
-                         AND `slug` = %s 
-                         ORDER BY `date` DESC", 
+                         FROM $plugin_update_report_table_name
+                         WHERE `type` = 'plugin'
+                         AND `slug` = %s
+                         ORDER BY `date` DESC",
                          array($plugin_slug) ) );
 
                     $today_plugin_update = $wpdb->get_row( $wpdb->prepare(
-                        "SELECT * 
-                        FROM $plugin_update_report_table_name 
-                        WHERE `type` = 'plugin' 
-                        AND `slug` = %s  
-                        AND `date` = %s", 
+                        "SELECT *
+                        FROM $plugin_update_report_table_name
+                        WHERE `type` = 'plugin'
+                        AND `slug` = %s
+                        AND `date` = %s",
                         array($plugin_slug, $mysqldate) ) );
 
                     if (!$last_plugin_update || version_compare($plugin['Version'], $last_plugin_update->version_after, '>')) {
@@ -259,7 +265,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                         if ($today_plugin_update) {
                             $reason = $today_plugin_update->reason;
                         }
-                        
+
                         $plugin_update = array(
                             'id' => $update_id,
                             'date' => $mysqldate,
@@ -319,7 +325,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
                 $start_date = $start_date_object->format('Y-m-d');
                 $end_date_object = new DateTime("now", $timezone);
                 $end_date = $end_date_object->format('Y-m-d');
-                
+
                 $updates_data = plugin_update_report_get_updates_data($start_date, $end_date);
                 ?>
                 <div class="plugin-update-report-big-numbers plugin-update-report-postbox plugin-update-report-widget">
@@ -389,13 +395,13 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
 
                 $data = new \stdClass;
 
-                $update_results = $wpdb->get_results( $wpdb->prepare( 
-                    "SELECT * 
-                    FROM $plugin_update_report_table_name 
-                    WHERE `version_before` IS NOT NULL 
-                    AND `date` >= %s 
-                    AND `date` <= %s 
-                    ORDER BY `date` ASC", 
+                $update_results = $wpdb->get_results( $wpdb->prepare(
+                    "SELECT *
+                    FROM $plugin_update_report_table_name
+                    WHERE `version_before` IS NOT NULL
+                    AND `date` >= %s
+                    AND `date` <= %s
+                    ORDER BY `date` ASC",
                     array($start_date, $end_date) ) );
 
                 $data = new \stdClass;
@@ -527,7 +533,7 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
         }
 
         public function register_session() {
-            
+
             if (!session_id()) {
                 session_start();
             }
