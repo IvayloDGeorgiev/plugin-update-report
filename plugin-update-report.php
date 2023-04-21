@@ -267,26 +267,33 @@ if (! class_exists('Plugin_Update_Report_Generator')) {
 
                     if (!$last_plugin_update || version_compare($plugin['Version'], $last_plugin_update->version_after, '>')) {
 
-                        $last_version = 'Not Available';
+                        
                         if ($last_plugin_update) {
                             $last_version = $last_plugin_update->version_after;
+                        } else {
+                            $last_version = 'Not Available';
                         }
-
-                        $update_id = null;
+                        
                         if ($today_plugin_update) {
                             $update_id = $today_plugin_update->id;
+                        } else {
+                             $update_id = null;
                         }
 
-                        $update_status = 'Pending';
+                        
                         if ($today_plugin_update) {
                             $update_status = 'successful';
                         } else if (!$today_plugin_update && $last_plugin_update) {
                             $update_status = $last_plugin_update->update_status;
+                        } else {
+                            $update_status = 'Pending';
                         }
 
-                        $reason = 'Not Available';
+                        
                         if ($today_plugin_update) {
                             $reason = $today_plugin_update->reason;
+                        } else {
+                            $reason = 'Not Available';
                         }
 
                         $plugin_update = array(
