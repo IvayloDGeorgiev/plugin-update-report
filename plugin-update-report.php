@@ -4,7 +4,7 @@
 * Plugin Name: Plugin Update Report Generator
 * Plugin URI: ivo-georigev.com
 * Description: This plugin generates a pdf of all the plugins that are updated
-* Version: 1.0.0
+* Version: 1.1
 * Author: Ivaylo Georgiev
 * Author URI: https://www.linkedin.com/in/ivogeorgiev404
 */
