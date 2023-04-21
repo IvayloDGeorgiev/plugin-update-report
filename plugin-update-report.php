@@ -9,29 +9,52 @@
 * Author URI: https://www.linkedin.com/in/ivogeorgiev404
 */
 
-namespace PluginUpdateReport;
-
-use Updater\Updater;
 
 define('PLUGIN_PATH', __DIR__);
 define('PLUGIN_URL', site_url());
 define('PLUGIN_UPDATE_REPORT_VERSION', '1.0');
 
 if (! class_exists('Plugin_Update_Report_Generator')) {
-    class Plugin_Update_Report_Generator extends Updater
+    class Plugin_Update_Report_Generator
     {
         //CONSTRUCTOR
         public function __construct()
         {
+     
             add_action('admin_menu', array( &$this, 'list_generator_menu'));
             add_action('init', array( &$this, 'register_session'));
             add_action('init', [$this, 'generate_pdf_action']);
-
+            add_action('init', [$this, 'PluginUpdateCheckerGit']);
+            
             $plugin = plugin_basename(__FILE__);
             add_filter("plugin_action_links_$plugin", array( &$this, 'settings_link' ));
 
             $this->create_plugin_database_table();
+            
+             include PLUGIN_PATH . 'Updater.php';
         }
+        
+        
+        //PLUGIN UPDATE CHECKER
+        public function PluginUpdateCheckerGit()
+        {
+            require 'plugin-update-checker/plugin-update-checker.php';
+            $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+            	'https://github.com/IvayloDGeorgiev/plugin-update-report',
+            	__FILE__,
+            	'plugin-update-report'
+            );
+            
+            //Set the branch that contains the stable release.
+            $myUpdateChecker->setBranch('main');
+            
+            //Optional: If you're using a private repository, specify the access token like this:
+            $myUpdateChecker->setAuthentication('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');
+            
+        }
+
+        
+    
         //Function to generate PDF when Button is pressed
         public function generate_pdf_action()
         {

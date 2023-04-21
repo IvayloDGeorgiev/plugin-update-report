@@ -1,7 +1,7 @@
 # Plugin-Update-Report-Generator
 
 Plugin Name: Plugin Update Reports
-Version: 1.1
+Version: 1.0
 Author: Ivo Georgiev
 
 
